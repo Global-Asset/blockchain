@@ -83,17 +83,51 @@
       margin-bottom: 28px;
       gap: 12px;
     }
-    .passport-row .country {
+
+    .passport-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .passport-photo {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 3px solid #c9a87c;
+      overflow: hidden;
+      background: #1a2f4a;
+      flex-shrink: 0;
+      box-shadow: 0 0 20px rgba(255, 215, 150, 0.2);
+    }
+    .passport-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .country {
       font-weight: 700;
       color: #ffd78a;
       font-size: 1.2rem;
     }
-    .passport-row .country span {
+    .country span {
       color: #b8a088;
       font-weight: 400;
       font-size: 0.9rem;
     }
-    .passport-row .id {
+    .registro-badge {
+      background: rgba(46, 204, 113, 0.15);
+      color: #2ecc71;
+      padding: 4px 16px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      border: 1px solid #2ecc71;
+      display: inline-block;
+    }
+
+    .passport-id {
       background: rgba(0, 0, 0, 0.4);
       padding: 6px 18px;
       border-radius: 40px;
@@ -105,7 +139,7 @@
       align-items: center;
       gap: 8px;
     }
-    .passport-row .id input {
+    .passport-id input {
       background: transparent;
       border: none;
       color: #f5e6d3;
@@ -114,11 +148,11 @@
       outline: none;
       width: 140px;
     }
-    .passport-row .meta {
+    .meta-tags {
       display: flex;
       gap: 8px;
     }
-    .passport-row .meta span {
+    .meta-tags span {
       background: #1a2f4a;
       padding: 4px 12px;
       border-radius: 40px;
@@ -158,11 +192,6 @@
       font-size: 1.5rem;
       color: #f5e6d3;
       margin-top: 4px;
-    }
-    .coin-card .balance small {
-      font-weight: 400;
-      font-size: 0.8rem;
-      color: #b8a088;
     }
     .coin-card .change {
       font-size: 0.7rem;
@@ -408,23 +437,6 @@
       text-decoration: underline;
     }
 
-    .passport-photo {
-      display: inline-block;
-      vertical-align: middle;
-      margin-right: 12px;
-      border-radius: 50%;
-      border: 2px solid #c9a87c;
-      width: 48px;
-      height: 48px;
-      overflow: hidden;
-      background: #1a2f4a;
-    }
-    .passport-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
     @keyframes glowPulse {
       0% { box-shadow: 0 0 20px rgba(255, 215, 150, 0.1); }
       50% { box-shadow: 0 0 40px rgba(255, 215, 150, 0.2); }
@@ -432,18 +444,6 @@
     }
     .glow-animate {
       animation: glowPulse 3s infinite;
-    }
-
-    .registro-badge {
-      background: rgba(46, 204, 113, 0.15);
-      color: #2ecc71;
-      padding: 4px 16px;
-      border-radius: 30px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      border: 1px solid #2ecc71;
-      display: inline-block;
-      margin-left: 12px;
     }
   </style>
 </head>
@@ -463,17 +463,18 @@
 
   <!-- PASSPORT ROW (with photo) -->
   <div class="passport-row">
-    <div style="display:flex; align-items:center; gap:12px;">
+    <div class="passport-left">
+      <!-- ===== PASSPORT PHOTO ===== -->
       <div class="passport-photo">
-        <img src="https://ui-avatars.com/api/?name=Angel+Lorento+Morgada&background=1e3b4a&color=fff&size=128&bold=true" alt="Passport" />
+        <img src="https://randomuser.me/api/portraits/men/82.jpg" alt="Passport Photo" />
       </div>
       <div class="country">🇪🇸 ESPAÑA <span>REINO DE ESPAÑA</span></div>
       <span class="registro-badge">✔ Registro Completado</span>
     </div>
-    <div class="id">
+    <div class="passport-id">
       PASAPORTE Nº <input type="text" id="passportInput" value="PAF64880" />
     </div>
-    <div class="meta">
+    <div class="meta-tags">
       <span>TIPO: P</span>
       <span>CÓDIGO: ESP</span>
     </div>
@@ -518,7 +519,6 @@
 
   <!-- OPERATIONS: DEPOSIT & WITHDRAW -->
   <div class="operations">
-    <!-- DEPOSIT -->
     <div class="op-card">
       <h3>💰 Depositar</h3>
       <p style="color:#b8a088; font-size:0.8rem; margin-bottom:12px;">Recibe cashback con tus pagos en crypto</p>
@@ -532,7 +532,6 @@
       </div>
     </div>
 
-    <!-- WITHDRAW -->
     <div class="op-card">
       <h3>📤 Retirar</h3>
       <div class="field">
