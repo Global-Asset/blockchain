@@ -3,25 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Activación de Billetera Crypto - Demo</title>
+<title>Crypto Investment Dashboard - Demo</title>
 <style>
-  body { background-color:#0b0f1a; color:#fff; font-family:Arial, sans-serif; text-align:center; }
-  .header { font-size:28px; margin-top:30px; color:#00bfff; }
-  .notice { background:#1a1f2e; border:2px solid #ff4444; padding:20px; margin:20px auto; width:80%; border-radius:10px; }
-  .notice strong { color:#ffcc00; }
-  .portfolio { display:flex; justify-content:center; flex-wrap:wrap; margin-top:20px; }
-  .coin { background:#1a1f2e; margin:10px; padding:15px; border-radius:10px; width:150px; }
-  .coin h3 { color:#00bfff; }
-  .buttons { margin-top:30px; }
-  button { background:#ffcc00; border:none; padding:10px 20px; margin:10px; border-radius:8px; font-weight:bold; cursor:pointer; }
+  body { background:#0b0f1a; color:#fff; font-family:Arial, sans-serif; }
+  .header { text-align:center; font-size:28px; margin:20px; color:#00bfff; }
+  .notice { background:#1a1f2e; border:2px solid #ff4444; padding:20px; margin:20px auto; width:80%; border-radius:10px; text-align:center; }
+  .portfolio { display:flex; justify-content:center; flex-wrap:wrap; }
+  .coin { background:#1a1f2e; margin:10px; padding:15px; border-radius:10px; width:180px; text-align:center; }
+  .coin h3 { color:#00ff88; }
+  .buttons { text-align:center; margin-top:30px; }
+  button { background:#ffcc00; border:none; padding:12px 25px; margin:10px; border-radius:8px; font-weight:bold; cursor:pointer; }
   button:hover { background:#ffaa00; }
+  .links { text-align:center; margin-top:40px; }
+  .links a { color:#00bfff; text-decoration:none; display:block; margin:8px; }
 </style>
+<script>
+  function deposit() {
+    alert("Depósito DEMO simulado a la dirección: 0xC5AD5cfcF81AD63a94227334b898eafCe6B27cCA ✅");
+  }
+  function withdraw() {
+    alert("Retiro DEMO simulado — requiere autorización del administrador @ECEcoin18. Contacto demo disponible en los enlaces.");
+  }
+</script>
 </head>
 <body>
-  <div class="header">Activación de Billetera Crypto</div>
+  <div class="header">Crypto Investment Dashboard (Demo)</div>
   <div class="notice">
-    <p>Motivo: la billetera <strong>0x8bae134b1d7d081933100f2b054c546fed71498b</strong> está inactiva.</p>
-    <p>Activación requerida: <strong>$3,000.00 USDT ✅</strong></p>
+    <p><strong>Motivo:</strong> La billetera está inactiva.</p>
+    <p><strong>Activación requerida:</strong> $3,000.00 USDT ✅</p>
     <p>Proceso de actualización en curso — crédito automático al completarse...</p>
   </div>
   <div class="portfolio">
@@ -31,9 +40,16 @@
     <div class="coin"><h3>ETH</h3><p>$7,299,870.00</p></div>
   </div>
   <div class="buttons">
-    <button>Depositar</button>
-    <button>Retirar</button>
+    <button onclick="deposit()">Depositar</button>
+    <button onclick="withdraw()">Retirar</button>
   </div>
-  <p style="margin-top:40px; color:#00ff88;">Activa tu billetera y recibe recompensas en crypto</p>
+  <div class="links">
+    <a href="https://wa.me/5491164517084" target="_blank">📲 Contactar Blockchain Team Officials (WhatsApp)</a>
+    <a href="#">✉️ Contactar admin secretary @ECEcoin18</a>
+    <a href="#">🌍 Organización: Empoderamiento de la vida</a>
+  </div>
+  <p style="text-align:center; margin-top:40px; color:#00ff88;">
+    Activa tu billetera y recibe recompensas en crypto
+  </p>
 </body>
 </html>
