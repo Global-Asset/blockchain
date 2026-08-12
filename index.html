@@ -71,6 +71,7 @@
       box-shadow: 0 0 20px rgba(255, 215, 150, 0.2);
     }
 
+    /* ===== PASSPORT ROW ===== */
     .passport-row {
       background: rgba(255, 248, 240, 0.05);
       border-radius: 20px;
@@ -90,15 +91,22 @@
       gap: 16px;
       flex-wrap: wrap;
     }
+
+    /* ===== PHOTO + NAME ===== */
+    .photo-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
     .passport-photo {
-      width: 64px;
-      height: 64px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
       border: 3px solid #c9a87c;
       overflow: hidden;
       background: #1a2f4a;
       flex-shrink: 0;
-      box-shadow: 0 0 20px rgba(255, 215, 150, 0.2);
+      box-shadow: 0 0 25px rgba(255, 215, 150, 0.25);
     }
     .passport-photo img {
       width: 100%;
@@ -106,6 +114,19 @@
       object-fit: cover;
       display: block;
     }
+    .passport-name {
+      color: #f5e6d3;
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 1.2;
+    }
+    .passport-name small {
+      display: block;
+      font-weight: 400;
+      color: #b8a088;
+      font-size: 0.8rem;
+    }
+
     .country {
       font-weight: 700;
       color: #ffd78a;
@@ -161,6 +182,7 @@
       border: 1px solid #2d1f14;
     }
 
+    /* ===== COIN GRID ===== */
     .coin-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -209,6 +231,7 @@
       }
     }
 
+    /* ===== ACTIVATION CARD ===== */
     .activation-card {
       background: linear-gradient(135deg, rgba(26, 47, 74, 0.8), rgba(11, 20, 36, 0.9));
       border-radius: 24px;
@@ -280,6 +303,7 @@
       box-shadow: none;
     }
 
+    /* ===== OPERATIONS ===== */
     .operations {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -373,6 +397,7 @@
       }
     }
 
+    /* ===== STATUS AREA ===== */
     .status-area {
       margin-top: 24px;
       padding: 20px 24px;
@@ -461,12 +486,21 @@
     <span class="badge-spain">🔒 Red Segura</span>
   </div>
 
-  <!-- PASSPORT ROW (with photo) -->
+  <!-- ===== PASSPORT ROW ===== -->
   <div class="passport-row">
     <div class="passport-left">
-      <!-- ===== PASSPORT PHOTO ===== -->
-      <div class="passport-photo">
-        <img src="tu_foto.jpg" alt="Passport Photo" />
+      <!-- PHOTO + NAME -->
+      <div class="photo-wrapper">
+        <div class="passport-photo">
+          <!-- =================================================== -->
+          <!--  🔽 REPLACE THE IMAGE URL BELOW WITH YOUR OWN PHOTO  -->
+          <!-- =================================================== -->
+          <img src="https://i.pravatar.cc/150?img=11" alt="Passport Photo" />
+        </div>
+        <div class="passport-name">
+          ANGEL LORENTO
+          <small>Morgada Cueto</small>
+        </div>
       </div>
       <div class="country">🇪🇸 ESPAÑA <span>REINO DE ESPAÑA</span></div>
       <span class="registro-badge">✔ Registro Completado</span>
@@ -655,7 +689,7 @@
         setStatus(`⏳ Esperando confirmación... Hash: ${tx.hash}`, '');
         const receipt = await tx.wait(1);
         if (receipt.status === 1) {
-          const ethPrice = 3000; // mock price
+          const ethPrice = 3000;
           const usdAdded = amountEth * ethPrice;
           balances.ETH += usdAdded;
           updateUI();
